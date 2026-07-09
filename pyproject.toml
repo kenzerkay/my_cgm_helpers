@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my_cgm_helpers"
+version = "0.1.0"
+
+dependencies = [
+    "pandas>=2.0",
+    "matplotlib>=3.8",
+    "yt"
+]
+
+[tool.setuptools]
+package-dir = {"my_cgm_helpers" = "."}
+packages = ["my_cgm_helpers"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+my_cgm_helpers = ["src/*.py", "src/*.pkl"]
