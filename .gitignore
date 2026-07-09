@@ -1,3 +1,8 @@
 # Distribution / packaging
 *.egg-info/
 *.egg   
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
