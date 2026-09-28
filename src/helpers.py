@@ -4,6 +4,7 @@ import re
 import pickle
 import yt
 import importlib.resources as pkg_resources
+from matplotlib.backends.backend_pdf import PdfPages
 
 def get_dirs(which_halo):
     """
@@ -234,6 +235,31 @@ def z_labels(RD_num):
         return r"$\mathrm{z=0.0}$"
 
 
+
+def get_ion_densities():
+    """
+    Returns the corresponding yt field name for a given ion.
+
+    Parameters:
+        ion list[str]: A string representing the ion (e.g., "Mg II", "C IV").   
+    returns:
+        str: The corresponding yt field name for the given ion.
+    """
+
+    ion_density_mapping = {
+        "H I": "H_p0_number_density",
+        "Mg II": "Mg_p1_number_density",
+        "Si II": "Si_p1_number_density",
+        "Si III": "Si_p2_number_density",
+        "Si IV": "Si_p3_number_density",
+        "C II": "C_p1_number_density",
+        "C III": "C_p2_number_density",
+        "C IV": "C_p3_number_density",
+        "N V": "N_p4_number_density",
+        "O VI": "O_p5_number_density"
+    }
+    return ion_density_mapping
+
 def ion_color(field):
     if field == "density":
         return "darkorange"
@@ -253,3 +279,17 @@ def ion_label(field):
         return r"$\mathrm{N_{C~IV}}$"
     elif field == "O_p5_number_density":
         return r"$\mathrm{N_{O~VI}}$"
+
+
+
+def pdf_draw(figures, pdfname):
+    """Save a sequence of matplotlib figures into a single PDF file.
+    Parameters:
+        figures (iterable[matplotlib.figure.Figure]): An iterable of matplotlib `Figure` objects to be written to the PDF, in order.
+        pdfname (str): Output file path for the generated PDF. If the file exists it will be overwritten.
+    Returns:
+        None: The function writes the PDF to disk as a side effect.
+    """
+    with PdfPages(pdfname) as pdf:
+        for fig in figures:
+            pdf.savefig(fig)
