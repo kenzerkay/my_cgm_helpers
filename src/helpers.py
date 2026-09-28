@@ -212,6 +212,15 @@ def transform_points(ds, val, data):
     P = [x_p, y_p, z_p] *ds.units.code_length
     return P
 
+def units(): 
+    
+    return {
+            "density": 'g/cm**3', 
+            "Mg_p1_number_density": 'cm**(-3)',  # Mg II
+            "C_p3_number_density": 'cm**(-3)',   # C IV
+            "O_p5_number_density": 'cm**(-3)'    # O VI
+            }   
+
 def units_projected(): 
     
     return {
